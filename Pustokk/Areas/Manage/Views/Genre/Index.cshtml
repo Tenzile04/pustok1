@@ -1,0 +1,48 @@
+﻿@using Pustokk.Models;
+@model List<Genre>
+@{
+    int counter = 0;
+}
+@section csss{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.1/sweetalert2.min.css" integrity="sha512-l1vPIxNzx1pUOKdZEe4kEnWCBzFVVYX5QziGS7zRZE4Gi5ykXrfvUgnSBttDbs0kXe2L06m9+51eadS+Bg6a+A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<div class="d-flex justify-content-between align-items-center container-fluid">
+    <h1>Genres</h1>
+    <div> <a asp-action="create" asp-controller="genre" class="btn btn-primary">Create</a></div>
+</div>
+
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var genre in Model)
+            {
+                counter++;
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@genre.Name</td>
+                   
+                    <td>
+                        <a asp-controller="genre" asp-action="update" asp-route-id="@genre.Id" class="btn btn-success">Update</a>
+                        <a asp-controller="genre" asp-action="delete" asp-route-id="@genre.Id" class="btn btn-danger delete-btn">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.1/sweetalert2.min.js" integrity="sha512-lhtxV2wFeGInLAF3yN3WN/2wobmk+HuoWjyr3xgft42IY0xv4YN7Ao8VnYOwEjJH1F7I+fadwFQkVcZ6ege6kA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+}

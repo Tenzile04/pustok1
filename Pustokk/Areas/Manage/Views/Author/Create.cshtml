@@ -1,0 +1,21 @@
+﻿@using Pustokk.Models;
+@model Author
+
+
+<div class="container-fluid">
+    <h1 class="mx-3">Create Author</h1>
+    <div class="row justify-content-center flex-column align-items-center">
+        <form class="col-md-8" asp-action="create" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+
+                <div class="form-group col-md-12">
+                    <label asp-for="FullName">FullName</label>
+                    <input asp-for="FullName" class="form-control" rows="6" placeholder="FullName">
+                    <span asp-validation-for="FullName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>
+</div>

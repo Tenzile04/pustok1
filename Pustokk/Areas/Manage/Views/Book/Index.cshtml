@@ -1,0 +1,56 @@
+﻿@using Pustokk.Models;
+@model List<Book>
+@{
+    int counter = 0;
+}
+
+<div class="d-flex justify-content-between align-items-center container-fluid">
+    <h1>Books</h1>
+    <div> <a asp-action="create" asp-controller="book" class="btn btn-primary">Create</a></div>
+</div>
+
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Code</th>
+                <th scope="col">Tax</th>
+                <th scope="col">SalePrice</th>
+                <th scope="col">CostPrice</th>
+                <th scope="col">DiscountPercent</th>
+                <th scope="col">IsAvailable</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                counter++;
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@book.Name</td>
+                    <td>@book.Description</td>
+                    <td>@book.Code</td>
+                    <td>@book.Tax </td>
+                    <td>@book.SalePrice</td>
+                    <td>@book.CostPrice</td>
+                    <td>@book.DiscountPercent</td>
+                    <td>@book.IsAvailable</td>
+                    <td>
+                        <a asp-controller="book" asp-action="update" asp-route-id="@book.Id" class="btn btn-success">Update</a>
+                        <a asp-controller="book" asp-action="delete" asp-route-id="@book.Id" class="btn btn-danger ">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+

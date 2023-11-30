@@ -1,0 +1,26 @@
+﻿@using Pustokk.Models
+@model Book
+
+<div class="d-flex justify-content-between align-items-center container-fluid">
+    <h1>Delete  Book</h1>
+</div>
+<div class="container-fluid">
+    <form method="post" class="row">
+        <div class="mb-3 col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Name</h5>
+                    <p class="card-text">@Model.Description</p>
+                    <p class="card-text">@Model.SalePrice</p
+                    <p class="card-text">@Model.CostPrice</p>
+                    <p class="card-text">@Model.DiscountPercent</p>
+                    <p class="card-text">@Model.Code</p>
+                    <p class="card-text">@Model.Tax</p>
+                </div>
+            </div>
+            <button style="width: 100px" type="submit" class="btn btn-danger">Delete</button>
+            <a asp-controller="book" asp-action="index" class="btn btn-primary">Back to home</a>
+        </div>
+
+    </form>
+</div>

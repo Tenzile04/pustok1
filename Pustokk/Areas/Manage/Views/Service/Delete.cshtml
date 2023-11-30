@@ -1,0 +1,23 @@
+﻿@using Pustokk.Models
+@model Service
+
+<div class="d-flex justify-content-between align-items-center container-fluid">
+    <h1>Delete Service</h1>
+</div>
+<div class="container-fluid">
+    <form method="post" class="row">
+        <div class="mb-3 col-md-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">@Model.Icon</h6>
+                    <p class="card-text">@Model.Description</p>
+
+                </div>
+            </div>
+            <button style="width: 100px" type="submit" class="btn btn-danger">Delete</button>
+            <a asp-controller="service" asp-action="index" class="btn btn-primary">Back to home</a>
+        </div>
+
+    </form>
+</div>

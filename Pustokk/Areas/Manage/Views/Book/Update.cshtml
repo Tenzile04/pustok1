@@ -1,0 +1,130 @@
+﻿@using Pustokk.Models
+@model Book
+<div class="container-fluid">
+    <h1 class="mx-3">Update</h1>
+    <div class="row justify-content-center flex-column align-items-center">
+        <form class="col-md-8" asp-action="Update" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Name">Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="Code">Code</label>
+                    <input asp-for="Code" class="form-control" placeholder="Code">
+                    <span asp-validation-for="Code" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="Description">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="6" placeholder="Description"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label asp-for="SalePrice">SalePrice</label>
+                    <input asp-for="SalePrice" class="form-control" placeholder="SalePrice">
+                    <span asp-validation-for="SalePrice" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="CostPrice">CostPrice</label>
+                    <input asp-for="CostPrice" class="form-control" placeholder="CostPrice">
+                    <span asp-validation-for="CostPrice" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="DiscountPercent">DiscountPercent</label>
+                    <input asp-for="DiscountPercent" class="form-control" placeholder="DiscountPercent">
+                    <span asp-validation-for="DiscountPercent" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Tax">Tax</label>
+                    <input asp-for="Tax" class="form-control" placeholder="Tax">
+                    <span asp-validation-for="Tax" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="AuthorId">AuthorId</label>
+                    <select asp-for="AuthorId" class="form-select" aria-label="Default select example">
+                        @foreach (var authors in ViewBag.Authors)
+                        {
+                            <option value="@authors.Id">@authors.FullName</option>
+                        }
+                    </select>
+                    <span asp-validation-for="AuthorId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="GenreId">GenreId</label>
+                    <select asp-for="GenreId" class="form-select" aria-label="Default select example">
+                        @foreach (var genres in ViewBag.Genres)
+                        {
+                            <option value="@genres.Id">@genres.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="GenreId" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="TagIds">TagIds</label>
+                    <select asp-for="TagIds" class="form-select" aria-label="Default select example">
+                        @foreach (var tags in ViewBag.Tags)
+                        {
+                            <option value="@tags.Id">@tags.Name</option>
+                        }
+                    </select>
+                    <span asp-validation-for="TagIds" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="mb-3 col-md-6">
+                    <label asp-for="BookPosterImageFile" class="form-label">BookPosterImageFile</label>
+                    <input asp-for="BookPosterImageFile" placeholder="BookPosterImageFile" class="form-control">
+                    <div style="width:150px;margin-top:20px">
+                        <img style="max-width:100%" src="~/uploads/books/@Model.BookImages?.Where(x=>x.IsPoster==true).FirstOrDefault()?.ImageUrl" />
+                    </div>
+                    <span asp-validation-for="BookPosterImageFile"></span>
+                </div>
+                <div class="mb-3 col-md-6">
+                    <label asp-for="BookHoverImageFile" class="form-label">BookHoverImageFile</label>
+                    <input asp-for="BookHoverImageFile" placeholder="BookHoverImageFile" class="form-control">
+                    <div style="width:150px;margin-top:20px">
+                        <img style="max-width:100%" src="~/uploads/books/@Model.BookImages?.Where(x=>x.IsPoster==false).FirstOrDefault()?.ImageUrl" />
+                    </div>
+                    <span asp-validation-for="BookHoverImageFile"></span>
+                </div>
+                <div class="mb-3 col-md-12">
+                    <label asp-for="ImageFiles" class="form-label">ImageFiles</label>
+                    <input asp-for="ImageFiles" placeholder="ImageFile" class="form-control">
+                   <div style="display:flex">
+                        @foreach (var sliderImage in Model.BookImages.Where(x => x.IsPoster == null))
+                        {
+                            <div style="width:150px;margin:0 20px;margin-top:20px;position:relative;">
+                                <span class="delete-image-btn position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger fs-1 text-white" style="right:2;font-size:15px !important;cursor:pointer">X</span>
+                                <img style="max-width:100%" src="~/uploads/books/@sliderImage.ImageUrl" />
+                                <input name="ImageIds" type="hidden" value="@sliderImage.Id"/>
+                            </div>
+                        }
+                   </div>
+                    <span asp-validation-for="ImageFiles"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" asp-for="IsAvailable">
+                    <label class="form-check-label" asp-for="IsAvailable">IsAvailable</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    var btns = document.querySelectorAll(".delete-image-btn");
+    btns.forEach(btn => {
+        btn.addEventListener("click", function () {
+            btn.parentElement.remove()
+        })
+    })
+</script>

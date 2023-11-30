@@ -1,0 +1,31 @@
+﻿@using Pustokk.Models;
+@model Service
+
+
+<div class="d-flex justify-content-between align-items-center container-fluid ">
+    <h1>Create Service</h1>
+    <div><a class="btn btn-primary" asp-action="index" asp-controller="service">Go To Home</a></div>
+</div>
+<div class="container-fluid">
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label for="" class="form-label">Title </label>
+                <input asp-for="Title" type="text" class="form-control" aria-describedby="emailHelp">
+                <span asp-validation-for="Title" style="color:red"></span>
+
+            </div>
+            <div class="mb-3 col-md-4">
+                <label for="" class="form-label">Description</label>
+                <input asp-for="Description" type="text" class="form-control">
+                <span asp-validation-for="Description" style="color:red"></span>
+            </div>
+            <div class="mb-3 col-md-4">
+                <label for="" class="form-label">Icon</label>
+                <input asp-for="Icon" type="text" class="form-control">
+                <span asp-validation-for="Icon" style="color:red"></span>
+            </div>       
+        </div>
+   <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>

@@ -1,0 +1,44 @@
+﻿@using Pustokk.Models;
+@model List<Service>
+@{
+    int counter = 0;
+}
+
+<div class="d-flex justify-content-between align-items-center container-fluid">
+    <h1>Services</h1>
+    <div> <a asp-action="create" asp-controller="service" class="btn btn-primary">Create</a></div>
+</div>
+
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Icon</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var service in Model)
+            {
+                counter++;
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@service.Title</td>
+                    <td>@service.Description</td>
+                    <td>@service.Icon</td>
+                    <td>
+                        <a asp-controller="service" asp-action="update" asp-route-id="@service.Id" class="btn btn-success">Update</a>
+                        <a asp-controller="service" asp-action="delete" asp-route-id="@service.Id" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
